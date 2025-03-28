@@ -1,31 +1,5 @@
-local correctPassword = "1234"  -- Thay đổi mật khẩu tại đây
-
--- Tạo GUI
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
--- Frame nhập mật khẩu
-local passwordFrame = Instance.new("Frame")
-passwordFrame.Size = UDim2.new(0, 300, 0, 150)
-passwordFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
-passwordFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-passwordFrame.Parent = screenGui
-
-local passwordLabel = Instance.new("TextLabel")
-passwordLabel.Text = "Nhập mật khẩu:"
-passwordLabel.Size = UDim2.new(1, 0, 0, 30)
-passwordLabel.Parent = passwordFrame
-
-local passwordBox = Instance.new("TextBox")
-passwordBox.Size = UDim2.new(1, -20, 0, 30)
-passwordBox.Position = UDim2.new(0, 10, 0, 40)
-passwordBox.Parent = passwordFrame
-
-local submitButton = Instance.new("TextButton")
-submitButton.Text = "Xác nhận"
-submitButton.Size = UDim2.new(1, -20, 0, 30)
-submitButton.Position = UDim2.new(0, 10, 0, 80)
-submitButton.Parent = passwordFrame
 
 -- Frame câu hỏi
 local questionFrame = Instance.new("Frame")
@@ -33,10 +7,9 @@ questionFrame.Size = UDim2.new(0, 300, 0, 150)
 questionFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
 questionFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 questionFrame.Parent = screenGui
-questionFrame.Visible = false  -- Ẩn ban đầu
 
 local questionLabel = Instance.new("TextLabel")
-questionLabel.Text = "Kiệt xem sex 12h đêm "
+questionLabel.Text = "1 + 1 = 2 đúng không?"
 questionLabel.Size = UDim2.new(1, 0, 0, 30)
 questionLabel.Parent = questionFrame
 
@@ -51,17 +24,6 @@ wrongButton.Text = "Sai"
 wrongButton.Size = UDim2.new(0.5, -10, 0, 30)
 wrongButton.Position = UDim2.new(0.5, 0, 0, 50)
 wrongButton.Parent = questionFrame
-
--- Xử lý nhập mật khẩu
-submitButton.MouseButton1Click:Connect(function()
-    if passwordBox.Text == correctPassword then
-        passwordFrame.Visible = false
-        questionFrame.Visible = true
-    else
-        passwordLabel.Text = "Sai mật khẩu!"
-        passwordLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
-    end
-end)
 
 -- Xử lý chọn "Đúng" -> Chạy script từ URL & Xóa script
 correctButton.MouseButton1Click:Connect(function()
@@ -82,10 +44,24 @@ correctButton.MouseButton1Click:Connect(function()
     script:Destroy()
 end)
 
--- Xử lý chọn "Sai" -> Xóa ngay lập tức toàn bộ script
+-- Xử lý chọn "Sai" -> Hiển thị hình ảnh trong 5 giây rồi xóa
 wrongButton.MouseButton1Click:Connect(function()
-    print("Bạn đã chọn Sai! Xóa toàn bộ script ngay lập tức.")
-    
-    screenGui:Destroy()  -- Xóa GUI
-    script:Destroy()  -- Xóa chính script này
+    print("Bạn đã chọn Sai! Hiển thị hình ảnh trong 5 giây...")
+
+    local imageFrame = Instance.new("Frame")
+    imageFrame.Size = UDim2.new(0, 500, 0, 500)
+    imageFrame.Position = UDim2.new(0.5, -250, 0.5, -250)
+    imageFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    imageFrame.Parent = screenGui
+
+    local imageLabel = Instance.new("ImageLabel")
+    imageLabel.Size = UDim2.new(1, 0, 1, 0)
+    imageLabel.Image = "https://upload.wikimedia.org/wikipedia/commons/2/2f/Hentai_-_yuuree-redraw.jpg"
+    imageLabel.Parent = imageFrame
+
+    -- Chờ 5 giây rồi xóa hình ảnh và script
+    task.wait(5)
+    imageFrame:Destroy()
+    screenGui:Destroy()
+    script:Destroy()
 end)
