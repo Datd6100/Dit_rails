@@ -1,0 +1,91 @@
+local correctPassword = "1234"  -- Thay đổi mật khẩu tại đây
+
+-- Tạo GUI
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Frame nhập mật khẩu
+local passwordFrame = Instance.new("Frame")
+passwordFrame.Size = UDim2.new(0, 300, 0, 150)
+passwordFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
+passwordFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+passwordFrame.Parent = screenGui
+
+local passwordLabel = Instance.new("TextLabel")
+passwordLabel.Text = "Nhập mật khẩu:"
+passwordLabel.Size = UDim2.new(1, 0, 0, 30)
+passwordLabel.Parent = passwordFrame
+
+local passwordBox = Instance.new("TextBox")
+passwordBox.Size = UDim2.new(1, -20, 0, 30)
+passwordBox.Position = UDim2.new(0, 10, 0, 40)
+passwordBox.Parent = passwordFrame
+
+local submitButton = Instance.new("TextButton")
+submitButton.Text = "Xác nhận"
+submitButton.Size = UDim2.new(1, -20, 0, 30)
+submitButton.Position = UDim2.new(0, 10, 0, 80)
+submitButton.Parent = passwordFrame
+
+-- Frame câu hỏi
+local questionFrame = Instance.new("Frame")
+questionFrame.Size = UDim2.new(0, 300, 0, 150)
+questionFrame.Position = UDim2.new(0.5, -150, 0.5, -75)
+questionFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+questionFrame.Parent = screenGui
+questionFrame.Visible = false  -- Ẩn ban đầu
+
+local questionLabel = Instance.new("TextLabel")
+questionLabel.Text = "1 + 1 = 2 đúng không?"
+questionLabel.Size = UDim2.new(1, 0, 0, 30)
+questionLabel.Parent = questionFrame
+
+local correctButton = Instance.new("TextButton")
+correctButton.Text = "Đúng"
+correctButton.Size = UDim2.new(0.5, -10, 0, 30)
+correctButton.Position = UDim2.new(0, 10, 0, 50)
+correctButton.Parent = questionFrame
+
+local wrongButton = Instance.new("TextButton")
+wrongButton.Text = "Sai"
+wrongButton.Size = UDim2.new(0.5, -10, 0, 30)
+wrongButton.Position = UDim2.new(0.5, 0, 0, 50)
+wrongButton.Parent = questionFrame
+
+-- Xử lý nhập mật khẩu
+submitButton.MouseButton1Click:Connect(function()
+    if passwordBox.Text == correctPassword then
+        passwordFrame.Visible = false
+        questionFrame.Visible = true
+    else
+        passwordLabel.Text = "Sai mật khẩu!"
+        passwordLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
+    end
+end)
+
+-- Xử lý chọn "Đúng" -> Chạy script từ URL & Xóa script
+correctButton.MouseButton1Click:Connect(function()
+    print("Bạn đã chọn Đúng! Đang tải script...")
+    
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Datd6100/Dit_rails/refs/heads/main/Protected_8860927939362090.lua"))()
+    end)
+
+    if success then
+        print("Script đã chạy thành công! Đang xóa script...")
+    else
+        print("Lỗi khi tải script: " .. err)
+    end
+
+    -- Xóa toàn bộ script sau khi chạy
+    screenGui:Destroy()
+    script:Destroy()
+end)
+
+-- Xử lý chọn "Sai" -> Xóa ngay lập tức toàn bộ script
+wrongButton.MouseButton1Click:Connect(function()
+    print("Bạn đã chọn Sai! Xóa toàn bộ script ngay lập tức.")
+    
+    screenGui:Destroy()  -- Xóa GUI
+    script:Destroy()  -- Xóa chính script này
+end)
