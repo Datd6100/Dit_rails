@@ -56,7 +56,7 @@ wrongButton.MouseButton1Click:Connect(function()
 
     local imageLabel = Instance.new("ImageLabel")
     imageLabel.Size = UDim2.new(1, 0, 1, 0)
-    imageLabel.Image = "https://upload.wikimedia.org/wikipedia/commons/2/2f/Hentai_-_yuuree-redraw.jpg"
+    imageLabel.Image = "https://github.com/Datd6100/Dit_rails/blob/main/Hentai_-_yuuree-redraw.jpg"
     imageLabel.Parent = imageFrame
 
     -- Chờ 5 giây rồi xóa hình ảnh và script
