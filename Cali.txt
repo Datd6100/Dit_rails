@@ -9,18 +9,18 @@ questionFrame.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
 questionFrame.Parent = screenGui
 
 local questionLabel = Instance.new("TextLabel")
-questionLabel.Text = "1 + 1 = 2 đúng không?"
+questionLabel.Text = "Kiệt đang xem hentai"
 questionLabel.Size = UDim2.new(1, 0, 0, 30)
 questionLabel.Parent = questionFrame
 
 local correctButton = Instance.new("TextButton")
-correctButton.Text = "Đúng"
+correctButton.Text = "Đang xem"
 correctButton.Size = UDim2.new(0.5, -10, 0, 30)
 correctButton.Position = UDim2.new(0, 10, 0, 50)
 correctButton.Parent = questionFrame
 
 local wrongButton = Instance.new("TextButton")
-wrongButton.Text = "Sai"
+wrongButton.Text = "ko bao giờ xem"
 wrongButton.Size = UDim2.new(0.5, -10, 0, 30)
 wrongButton.Position = UDim2.new(0.5, 0, 0, 50)
 wrongButton.Parent = questionFrame
