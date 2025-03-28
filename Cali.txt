@@ -36,7 +36,7 @@ questionFrame.Parent = screenGui
 questionFrame.Visible = false  -- Ẩn ban đầu
 
 local questionLabel = Instance.new("TextLabel")
-questionLabel.Text = "CALI mãi định Việt Nam địt mẹ "
+questionLabel.Text = "Kiệt xem sex 12h đêm "
 questionLabel.Size = UDim2.new(1, 0, 0, 30)
 questionLabel.Parent = questionFrame
 
